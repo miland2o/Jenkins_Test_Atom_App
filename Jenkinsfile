@@ -23,7 +23,8 @@ pipeline {
 
         stage('Docker-build') {
             steps {
-                docker.build("docker-jenkins-test")
+                echo "Docker-build phase"
+                sh "docker build -f Dockerfile -t docker-jenkins-test ."
             }
         }
     }
