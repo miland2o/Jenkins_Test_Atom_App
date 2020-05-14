@@ -11,22 +11,20 @@ pipeline {
             steps {
                 echo "Building phase"
                 echo "Workspace directory: ${WORKSPACE}"
-                sh 'mvn clean compile'
+                sh 'mvn clean package'
             }
         }
 
         stage('Test') {
             steps {
                 echo "Test phase"
-                sh 'mvn test'
             }
         }
 
-        stage('Deploy') {
+        stage('Docker-build') {
             steps {
-                echo "Deployment phase"
-                sh 'mvn package'
-             }
-         }
+                docker.build("docker-jenkins-test")
+            }
+        }
     }
 }
